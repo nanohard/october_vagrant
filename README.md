@@ -1,4 +1,4 @@
-# october_vagrant, version: Install
+### october_vagrant, version: Install
 Vagrant files for OctoberCMS.
 Installs OctoberCMS to "october/" and links it to /var/www in vagrant.
 
