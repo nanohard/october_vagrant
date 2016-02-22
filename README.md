@@ -1,4 +1,4 @@
-# october_vagrant, version: Link
+### october_vagrant, version: Link
 Vagrant files for OctoberCMS.
 Assumes your current path is an OctoberCMS root directory, and links it to /var/www in vagrant.
 Does not install OctoberCMS.
