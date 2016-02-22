@@ -1,5 +1,9 @@
 # october_vagrant
-Vagrant files for OctoberCMS. Debian, Nginx, PHP7
+Vagrant files for OctoberCMS.
+Assumes your current path is an OctoberCMS root directory, and links it to /var/www in vagrant.
+
+### Installs the following in vagrant
+Debian, Nginx, PHP7, MySQL, Redis, Git
 
 ## Vagrantfile
 You may want to edit:
