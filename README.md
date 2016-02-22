@@ -4,7 +4,7 @@ If you do not yet have OctoberCMS installed, you want the "install" branch.
 
 ```
 git clone git@github.com:nanohard/october_vagrant.git
-git co link
+git checkout link
 OR
-git co install
+git checkout install
 ```
