@@ -54,7 +54,7 @@ sudo apt-get install redis-server -y > /dev/null 2>&1
 
 echo -e "\n--- Migrating OctoberCMS database ---\n"
 sudo cp /home/vagrant/.vagrantfiles/october/.env /var/www/
-sudo cp /home/vagrant/.vagrantfiles/october/config/dev/* /var/www/config/dev/
+sudo cp /home/vagrant/.vagrantfiles/october/config/dev/database.php /var/www/config/dev/
 pushd /var/www
 php artisan october:up
 popd
