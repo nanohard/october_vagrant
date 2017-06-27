@@ -9,10 +9,6 @@ DBROOTPASSWD=vagrant
 echo "Provisioning virtual machine..."
 
 echo -e "\n--- Updating apt sources ---\n"
-echo 'deb http://packages.dotdeb.org jessie all' | sudo tee --append /etc/apt/sources.list.d/dotdeb.list
-echo 'deb-src http://packages.dotdeb.org jessie all' | sudo tee --append /etc/apt/sources.list.d/dotdeb.list
-wget --quiet https://www.dotdeb.org/dotdeb.gpg
-sudo apt-key add dotdeb.gpg > /dev/null 2>&1
 sudo apt-get update > /dev/null 2>&1
 sudo apt-get dist-upgrade -y > /dev/null 2>&1
 
@@ -23,19 +19,22 @@ echo -e "\n--- Installing Nginx ---\n"
 sudo apt-get install nginx -y > /dev/null 2>&1
 
 echo -e "\n--- Installing PHP7.0 ---\n"
-sudo apt-get install php7.0 php7.0-* -y > /dev/null 2>&1
+sudo apt-get install php7.0 php7.0-common php7.0-fpm php7.0-cli php7.0-opcache php7.0-memcached php7.0-redis \
+php7.0-gnupg php7.0-calendar php7.0-fileinfo php7.0-bcmath php7.0-xml php7.0-uploadprogress php7.0-tokenizer \
+php7.0-imagick php7.0-gettext php7.0-mbstring php7.0-gd php7.0-uuid php7.0-mysql php7.0-sqlite3 php7.0-pgsql \
+php-xdebug php7.0-json php7.0-phar php7.0-curl php7.0-zip php7.0-mcrypt php7.0-geoip php-yaml -y > /dev/null 2>&1
 
 sudo apt-get install debconf-utils -y > /dev/null 2>&1
 
 echo -e "\n--- Installing MySQL, phpMyAdmin, and settings ---\n"
-echo "mysql-server mysql-server/root_password password $DBROOTPASSWD" | debconf-set-selections
-echo "mysql-server mysql-server/root_password_again password $DBROOTPASSWD" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password $DBROOTPASSWD" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password $DBROOTPASSWD" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/app-pass password $DBROOTPASSWD" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none" | debconf-set-selections
-apt-get install mysql-server phpmyadmin -y > /dev/null 2>&1
+echo "mysql-server mysql-server/root_password password $DBROOTPASSWD" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password $DBROOTPASSWD" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/app-password-confirm password $DBROOTPASSWD" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password $DBROOTPASSWD" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/app-pass password $DBROOTPASSWD" | sudo debconf-set-selections
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none" | sudo debconf-set-selections
+sudo apt-get install mysql-server phpmyadmin -y > /dev/null 2>&1
 
 echo -e "\n--- Setting up our MySQL user and db ---\n"
 mysql -uroot -p$DBROOTPASSWD -e "CREATE DATABASE $DBNAME"
