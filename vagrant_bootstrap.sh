@@ -3,10 +3,6 @@
 echo "Provisioning virtual machine..."
 
 echo "Updating apt sources"
-echo 'deb http://packages.dotdeb.org jessie all' | sudo tee --append /etc/apt/sources.list.d/dotdeb.list
-echo 'deb-src http://packages.dotdeb.org jessie all' | sudo tee --append /etc/apt/sources.list.d/dotdeb.list
-wget https://www.dotdeb.org/dotdeb.gpg
-sudo apt-key add dotdeb.gpg
 sudo apt-get update
 sudo apt-get dist-upgrade -y
 
