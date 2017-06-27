@@ -22,13 +22,13 @@ sudo apt-get install debconf-utils -y
 
 echo "Installing MySQL"
 # MySQL root password
-debconf-set-selections <<< "mysql-server mysql-server/root_password password vagrant"
-debconf-set-selections <<< "mysql-server mysql-server/root_password_again password vagrant"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password vagrant"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password vagrant"
 sudo apt-get install mysql-server -y
 
 echo "Configuring Nginx"
-CURRENTDIR=$(pwd)
-sudo cp "${CURRENTDIR}/vagrant_nginx_conf" /etc/nginx/sites-available/nginx_vhost
+VAGRANTDIR='/vagrant'
+sudo cp "${VAGRANTDIR}/vagrant_nginx_conf" /etc/nginx/sites-available/nginx_vhost
 sudo ln -s /etc/nginx/sites-available/nginx_vhost /etc/nginx/sites-enabled/
 sudo rm -rf /etc/nginx/sites-available/default
 sudo systemctl restart nginx.service
